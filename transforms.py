@@ -31,6 +31,54 @@ def parse_args():
 
 #========1=========2=========3=========4=========5=========6=========7==
 
+# RETURNS: translated matrix. 
+def translation(direction, size, matrix):
+
+    # TRANSLATION
+
+    # Generate the translation unit vector. 
+    translation_vec = np.zeros(1,100)
+    translation_vec[0] = 1   
+ 
+    translation_size = 6
+    trans_matrix = []
+
+    # Multiply our unit direction vector by our chosen scale factor. 
+    translation_vec = translation_size * translation_vec   
+ 
+    # Apply the translation. 
+    for i in range(0, num_rows):     
+        trans_matrix[i] = vectors_matrix[i] + translation_vec
+
+    return trans_matrix
+
+#========1=========2=========3=========4=========5=========6=========7==
+
+# RETURNS: Homothetic transform of matrix. 
+def homothetic(direction, size, matrix):
+
+    # HOMOGENEOUS DILATION
+
+    # For a sample center point, we just use the origin. 
+    center = np.zeros(1,100)
+    
+    dilation_size = 6
+
+    trans_matrix = []
+
+    for i in range(0,num_rows):
+        center_diff = vectors_matrix[i] - center
+        scaled_center_diff = dilation_size * center_diff
+        trans_matrix[i] = center + scaled_center_diff
+    
+    return trans_matrix
+
+#========1=========2=========3=========4=========5=========6=========7==
+
+
+
+
+
 # RETURNS: transformed matrix. 
 
 def transflow():
@@ -50,20 +98,39 @@ def transflow():
     sample_vector = vectors_matrix[0]
     dimensions = len(sample_vector)
 
-    # Generate the translation unit vector. 
-    translation_vec = [1]
-    for j in range(1, dimensions):
-        translation_vec.append(0)
     
-    translation_size = 6
 
-    trans_matrix = []
 
-    for j in range(0, dimensions):
-        translation_vec[j] = translation_size * translation_vec[j]
     
-    for i in range(0, numrows):
-        for j in range(0, dimensions):
-            trans_matrix[i][j] = vectors_matrix[i][j] + translation_vec[j]
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
