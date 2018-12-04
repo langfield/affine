@@ -55,7 +55,7 @@ def translation(direction, size, matrix):
 #========1=========2=========3=========4=========5=========6=========7==
 
 # RETURNS: Homothetic transform of matrix. 
-def homothetic(direction, size, matrix):
+def homothetic(center, size, matrix):
 
     # HOMOGENEOUS DILATION
 
@@ -75,9 +75,26 @@ def homothetic(direction, size, matrix):
 
 #========1=========2=========3=========4=========5=========6=========7==
 
+# RETURNS: Uniform scale of matrix. 
+def uniform_scale(size, matrix):
 
+    # UNIFORM SCALE    
 
+    # For a sample center point, we just use the origin. 
+    center = np.zeros(1,100)
+    
+    dilation_size = 6
 
+    trans_matrix = []
+
+    for i in range(0,num_rows):
+        center_diff = vectors_matrix[i] - center
+        scaled_center_diff = dilation_size * center_diff
+        trans_matrix[i] = center + scaled_center_diff
+    
+    return trans_matrix
+
+#========1=========2=========3=========4=========5=========6=========7==
 
 # RETURNS: transformed matrix. 
 
