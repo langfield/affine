@@ -79,18 +79,11 @@ def homothetic(center, size, matrix):
 def uniform_scale(size, matrix):
 
     # UNIFORM SCALE    
-
-    # For a sample center point, we just use the origin. 
-    center = np.zeros(1,100)
     
-    dilation_size = 6
-
     trans_matrix = []
 
     for i in range(0,num_rows):
-        center_diff = vectors_matrix[i] - center
-        scaled_center_diff = dilation_size * center_diff
-        trans_matrix[i] = center + scaled_center_diff
+        trans_matrix[i] = size * matrix[i]
     
     return trans_matrix
 
