@@ -107,6 +107,23 @@ def reflect(hyperplane_vec, matrix):
 
 #========1=========2=========3=========4=========5=========6=========7==
 
+# RETURNS: Rotation of angle theta within the plane specified by
+# the two vectors u,v.  
+def rotate_2d(u, v, theta, matrix):
+
+    # PLANAR ROTATION IN R^n
+    trans_matrix = []
+
+    for i in range(0,num_rows):
+        v = matrix[i]
+        
+
+        trans_matrix[i] = reflected_v
+    
+    return trans_matrix
+
+#========1=========2=========3=========4=========5=========6=========7==
+
 # RETURNS: transformed matrix. 
 
 def transflow():
