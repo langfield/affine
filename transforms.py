@@ -116,7 +116,8 @@ def rotate_2d(u, v, theta, matrix):
 
     for i in range(0,num_rows):
         v = matrix[i]
-        
+        dimensions = len(v)
+        I = numpy.identity(dimensions) 
 
         trans_matrix[i] = reflected_v
     
