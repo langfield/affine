@@ -89,6 +89,24 @@ def uniform_scale(size, matrix):
 
 #========1=========2=========3=========4=========5=========6=========7==
 
+# Note that a hyperplane through the origin in R^{n} is defined by a 
+# single vector (hyperplane orthogonal to a). 
+# RETURNS: Uniform scale of matrix. 
+def reflect(hyperplane_vec, matrix):
+
+    # REFLECTION        
+    a = hyperplane_vec    
+    trans_matrix = []
+
+    for i in range(0,num_rows):
+        v = matrix[i]
+        reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
+        trans_matrix[i] = reflected_v
+    
+    return trans_matrix
+
+#========1=========2=========3=========4=========5=========6=========7==
+
 # RETURNS: transformed matrix. 
 
 def transflow():
