@@ -8,6 +8,7 @@ from progressbar    import progressbar
 from tqdm           import tqdm
 
 import pyemblib
+import sympy
 import scipy
 import time
 import sys
@@ -117,10 +118,35 @@ def rotate_2d(u, v, theta, matrix):
     for i in range(0,num_rows):
         v = matrix[i]
         dimensions = len(v)
-        I = numpy.identity(dimensions) 
+        I = np.identity(dimensions) 
+        u_transpose = np.flip(u)
+        v_transpose = np.flip(v)
+        diff_1 = np.multiply(v,u_transpose) - np.multiply(u,v_transpose)
+        diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
+        summand_1 = np.sin(theta) * diff_1
+        summand_2 = (np.cos(theta)  - 1) * diff_2
+        trans_matrix = I + summand_1 + summand_2 
+    return trans_matrix
 
-        trans_matrix[i] = reflected_v
-    
+#========1=========2=========3=========4=========5=========6=========7==
+
+# RETURNS: Shear mapping of something into something else. 
+def shear(u, v, theta, matrix):
+
+    # PLANAR ROTATION IN R^n
+    trans_matrix = []
+
+    for i in range(0,num_rows):
+        v = matrix[i]
+        dimensions = len(v)
+        I = np.identity(dimensions) 
+        u_transpose = np.flip(u)
+        v_transpose = np.flip(v)
+        diff_1 = np.multiply(v,u_transpose) - np.multiply(u,v_transpose)
+        diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
+        summand_1 = np.sin(theta) * diff_1
+        summand_2 = (np.cos(theta)  - 1) * diff_2
+        trans_matrix = I + summand_1 + summand_2 
     return trans_matrix
 
 #========1=========2=========3=========4=========5=========6=========7==
