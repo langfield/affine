@@ -7,6 +7,8 @@ import math
 def get_config(dim):
     transforms = []
 
+    # VECTOR LIBRARY.
+    zeroes = np.zeros(dim) 
     diag = np.ones(dim) / math.sqrt(dim)
     one_hot = np.array([1 if i == 0 else 0 for i in range(dim)])
     two_hot = np.array([1 if i < 2 else 0 for i in range(dim)])
@@ -21,8 +23,8 @@ def get_config(dim):
         [ diag, 2 ]                            
         [ diag, 0.5 ]                            
         [ diag, 0.25 ]                            
-        [ np.array([1 if i == 0 else 0 for i in range(dim)]), 1 ]      # 1-hot vector with nonzero value in first dimension. 
-        [ np.array([1 if i < 2 else 0 for i in range(dim)]), 1 ]       # 2-hot vector with nonzero values in first 2 dimensions. 
+        [ one_hot, 1 ]      # 1-hot vector with nonzero value in first dimension. 
+        [ two_hot, 1 ]       # 2-hot vector with nonzero values in first 2 dimensions. 
         
 
     # Append translation config. 
@@ -34,8 +36,8 @@ def get_config(dim):
     # FORMAT: [ center, magnitude ]
     # Note: A magnitude of 1 leaves all vectors unchanged. 
     hom_args = [
-        [ np.zeros(dim), 2 ]
-        [ np.zeros(dim), 0.5 ]
+        [ zeroes, 2 ]
+        [ zeroes, 0.5 ]
         [ diag, 2 ]                            
         [ diag, 0.5 ]                            
         [ diag, 0.25 ]                            
