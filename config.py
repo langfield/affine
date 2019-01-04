@@ -39,6 +39,39 @@ def get_config(dim):
     # Append hom config. 
     transforms.append([ affine_funcs.homothetic, hom_args ])
 
+    #=================================
+
+    # REFLECTION. 
+    # FORMAT: [ hyperplane_vec ]
+    mulan_args = [
+        [ np.zeros(dim) ]
+        [ np.ones(dim) / math.sqrt(dim) ]                            
+        [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
+        [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
+    ]
+       
+    # Append hom config. 
+    transforms.append([ affine_funcs.reflect, mulan_args ])
+
+    #=================================
+
+    # 2-DIMENSIONAL PLANAR ROTATION. 
+    # FORMAT: [ u, v, theta ]
+    rot_args = [
+        [ np.zeros(dim) ]
+        [ np.ones(dim) / math.sqrt(dim) ]                            
+        [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
+        [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
+    ]
+       
+    # Append hom config. 
+    transforms.append([ affine_funcs.rotate_2D, rot_args ])
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

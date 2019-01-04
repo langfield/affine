@@ -110,7 +110,7 @@ def reflect(hyperplane_vec, matrix):
 
 # RETURNS: Rotation of angle theta within the plane specified by
 # the two vectors u,v.  
-def rotate_2d(u, v, theta, matrix):
+def rotate_2D(u, v, theta, matrix):
 
     # PLANAR ROTATION IN R^n
     trans_matrix = []
