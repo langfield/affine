@@ -31,21 +31,13 @@ def get_config(dim):
     hom_args = [
         [ np.zeros(dim), 2 ]
         [ np.zeros(dim), 0.5 ]
-        [ np.ones(dim) / math.sqrt(dim), 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
         [ np.ones(dim) / math.sqrt(dim), 2 ]                            
         [ np.ones(dim) / math.sqrt(dim), 0.5 ]                            
         [ np.ones(dim) / math.sqrt(dim), 0.25 ]                            
-
-
-
-
     ]
-      
-
-
- 
+       
     # Append hom config. 
-    transforms.append([ affine_funcs.hom, hom_args ])
+    transforms.append([ affine_funcs.homothetic, hom_args ])
 
 
 
