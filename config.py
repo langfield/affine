@@ -19,12 +19,12 @@ def get_config(dim):
     # TRANSLATION. 
     # FORMAT: [ direction_vector, magnitude ]
     transl_args = [
-        [ diag, 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
+        [ diag, 1 ]     # Vector with all-positive components equidistant from all coordinate axes. 
         [ diag, 2 ]                            
         [ diag, 0.5 ]                            
         [ diag, 0.25 ]                            
-        [ one_hot, 1 ]      # 1-hot vector with nonzero value in first dimension. 
-        [ two_hot, 1 ]       # 2-hot vector with nonzero values in first 2 dimensions. 
+        [ one_hot, 1 ]  # 1-hot vector with nonzero value in first dimension. 
+        [ two_hot, 1 ]  # 2-hot vector with nonzero values in first 2 dimensions. 
         
 
     # Append translation config. 
@@ -51,10 +51,10 @@ def get_config(dim):
     # REFLECTION. 
     # FORMAT: [ hyperplane_vec ]
     mulan_args = [
-        [ np.zeros(dim) ]
+        [ zeroes ]
         [ diag ]                            
-        [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
-        [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
+        [ one_hot ]    
+        [ two_hot ] 
     ]
        
     # Append hom config. 
@@ -66,8 +66,8 @@ def get_config(dim):
     # FORMAT: [ u, v, theta ]
     rot_args = [
         [ diag ]                            
-        [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
-        [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
+        [ one_hot ]    
+        [ two_hot ] 
     ]
        
     # Append hom config. 
