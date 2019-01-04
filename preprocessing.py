@@ -1,9 +1,11 @@
+from gensim.scripts.glove2word2vec import glove2word2vec
+from gensim.models.keyedvectors import KeyedVectors
+from progressbar import progressbar
+from tqdm import tqdm
+
 import multiprocessing as mp
 import pandas as pd
 import numpy as np
-
-from progressbar import progressbar
-from tqdm import tqdm
 
 import pyemblib
 import scipy
@@ -11,6 +13,12 @@ import queue
 import time
 import sys
 import os 
+
+'''
+preprocessing.py
+
+Preprocessing methods for cuto.py. 
+'''
 
 #========1=========2=========3=========4=========5=========6=========7==
 
@@ -44,42 +52,72 @@ def check_valid_file(some_file):
 
 #========1=========2=========3=========4=========5=========6=========7==
 
+def loadGloveModel(gloveFile):
+    print("Loading Glove Model")
+    f = open(gloveFile,'r')
+    model = {}
+    for line in f:
+        splitLine = line.split()
+        word = splitLine[0]
+        embedding = np.array([float(val) for val in splitLine[1:]])
+        model[word] = embedding
+    print("Done.",len(model)," words loaded!")
+    return model
+
+#========1=========2=========3=========4=========5=========6=========7==
+
 # pass None to vocab to use use entire embedding
 # RETURNS: [numpy matrix of word vectors, df of the labels]
-def process_embedding(emb_path, first_n, vocab):
+def process_embedding(emb_path, emb_format, first_n, vocab):
 
     print("Preprocessing. ")
     file_name_length = len(emb_path)
-    last_char = emb_path[file_name_length - 1]
+    extension = os.path.basename(emb_path).split('.')[-1]
 
     # Decide if it's a binary or text embedding file, and read in
     # the embedding as a dict object, where the keys are the tokens
     # (strings), and the values are the components of the corresponding 
     # vectors (floats).
     embedding = {}
-    if (first_n != 0):
-        if (last_char == 'n'):
-            embedding = pyemblib.read(emb_path, 
-                                      mode=pyemblib.Mode.Binary,
-                                      first_n=first_n) 
-        elif (last_char == 't'):
-            embedding = pyemblib.read(emb_path, 
-                                      mode=pyemblib.Mode.Text, 
-                                      first_n=first_n)
-        else:
-            print("Unsupported embedding format. ")
-            exit()
+    read_mode = None
+    if first_n == 0 or emb_format == pyemblib.Format.Glove:
+        
+        print("No value passed for first_n or feature not supported. ")
+        first_n = None
+    if extension == 'bin':
+        read_mode = pyemblib.Mode.Binary
+        binary = True
+        print("binary reac.")
+    elif extension == 'txt':
+        read_mode = pyemblib.Mode.Text
+        binary = False
+        print("text read.")
     else:
-        if (last_char == 'n'):
-            embedding = pyemblib.read(emb_path, 
-                                      mode=pyemblib.Mode.Binary)
-        elif (last_char == 't'):
-            embedding = pyemblib.read(emb_path, 
-                                      mode=pyemblib.Mode.Text) 
-        else:
-            print("Unsupported embedding format. ")
-            exit()
-
+        print("Unsupported embedding mode. ")
+        exit()
+    ''' 
+    if emb_format == pyemblib.Format.Glove:
+        embedding = loadGloveModel(emb_path)
+    '''
+    
+    if first_n:    
+        embedding = pyemblib.read(  emb_path, 
+                                    format=emb_format,
+                                    mode=read_mode,
+                                    first_n=first_n,
+                                    replace_errors=True,
+                                    skip_parsing_errors=True,
+                                    ) 
+    else:
+        embedding = pyemblib.read(  emb_path, 
+                                    format=emb_format,
+                                    mode=read_mode,
+                                    replace_errors=True,
+                                    skip_parsing_errors=True,
+                                    ) 
+       
+     
+    
     # take a subset of the vocab
     new_embedding = {}
     if (vocab != None):
