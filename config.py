@@ -11,14 +11,15 @@ def get_config(dim):
 
     # TRANSLATION. 
     # FORMAT: [ direction_vector, magnitude ]
-    transl_args = []
-    transl_args.append([ np.ones(dim) / math.sqrt(dim), 1 ])                           # Vector with all-positive components equidistant from all coordinate axes. 
-    transl_args.append([ np.ones(dim) / math.sqrt(dim), 2 ])                            
-    transl_args.append([ np.ones(dim) / math.sqrt(dim), 0.5 ])                            
-    transl_args.append([ np.ones(dim) / math.sqrt(dim), 0.25 ])                            
-    transl_args.append([ np.array([1 if i == 0 else 0 for i in range(dim)]), 1 ])      # 1-hot vector with nonzero value in first dimension. 
-    transl_args.append([ np.array([1 if i < 2 else 0 for i in range(dim)]), 1 ])       # 2-hot vector with nonzero values in first 2 dimensions. 
-    
+    transl_args = [
+        [ np.ones(dim) / math.sqrt(dim), 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
+        [ np.ones(dim) / math.sqrt(dim), 2 ]                            
+        [ np.ones(dim) / math.sqrt(dim), 0.5 ]                            
+        [ np.ones(dim) / math.sqrt(dim), 0.25 ]                            
+        [ np.array([1 if i == 0 else 0 for i in range(dim)]), 1 ]      # 1-hot vector with nonzero value in first dimension. 
+        [ np.array([1 if i < 2 else 0 for i in range(dim)]), 1 ]       # 2-hot vector with nonzero values in first 2 dimensions. 
+    ]    
+
     # Append translation config. 
     transforms.append([ affine_funcs.translation, transl_args ])
     
@@ -27,13 +28,10 @@ def get_config(dim):
     # HOMOTHETIC TRANSFORM. 
     # FORMAT: [ center, magnitude ]
     hom_args = []
-    hom_args.append([ np.ones(dim) / math.sqrt(dim), 1 ])                           # Vector with all-positive components equidistant from all coordinate axes. 
-    hom_args.append([ np.ones(dim) / math.sqrt(dim), 2 ])                            
-    hom_args.append([ np.ones(dim) / math.sqrt(dim), 0.5 ])                            
-    hom_args.append([ np.ones(dim) / math.sqrt(dim), 0.25 ])                            
-    hom_args.append([ np.array([1 if i == 0 else 0 for i in range(dim)]), 1 ])      # 1-hot vector with nonzero value in first dimension. 
-    hom_args.append([ np.array([1 if i < 2 else 0 for i in range(dim)]), 1 ])       # 2-hot vector with nonzero values in first 2 dimensions. 
-    
+       
+
+
+ 
     # Append hom config. 
     transforms.append([ affine_funcs.hom, hom_args ])
 
