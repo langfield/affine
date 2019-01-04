@@ -116,6 +116,7 @@ def rotate_2d(u, v, theta, matrix):
     trans_matrix = []
     num_rows = len(matrix)
 
+    # This cannot possibly be correct.
     for i in range(0,num_rows):
         row = matrix[i]
         dimensions = len(row)
