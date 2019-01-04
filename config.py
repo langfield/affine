@@ -27,6 +27,7 @@ def get_config(dim):
 
     # HOMOTHETIC TRANSFORM. 
     # FORMAT: [ center, magnitude ]
+    # Note: A magnitude of 1 leaves all vectors unchanged. 
     hom_args = [
         [ np.zeros(dim), 2 ]
         [ np.zeros(dim), 0.5 ]
