@@ -27,8 +27,19 @@ def get_config(dim):
 
     # HOMOTHETIC TRANSFORM. 
     # FORMAT: [ center, magnitude ]
-    hom_args = []
-       
+    hom_args = [
+        [ np.zeros(dim), 2 ]
+        [ np.zeros(dim), 0.5 ]
+        [ np.ones(dim) / math.sqrt(dim), 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
+        [ np.ones(dim) / math.sqrt(dim), 2 ]                            
+        [ np.ones(dim) / math.sqrt(dim), 0.5 ]                            
+        [ np.ones(dim) / math.sqrt(dim), 0.25 ]                            
+
+
+
+
+    ]
+      
 
 
  
