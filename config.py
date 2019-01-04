@@ -6,19 +6,24 @@ import math
 
 def get_config(dim):
     transforms = []
+
+    diag = np.ones(dim) / math.sqrt(dim)
+    one_hot = np.array([1 if i == 0 else 0 for i in range(dim)])
+    two_hot = np.array([1 if i < 2 else 0 for i in range(dim)])
+    two_hot = two_hot / np.linalg.norn(two_hot) # Normalize. 
     
     #=================================
 
     # TRANSLATION. 
     # FORMAT: [ direction_vector, magnitude ]
     transl_args = [
-        [ np.ones(dim) / math.sqrt(dim), 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
-        [ np.ones(dim) / math.sqrt(dim), 2 ]                            
-        [ np.ones(dim) / math.sqrt(dim), 0.5 ]                            
-        [ np.ones(dim) / math.sqrt(dim), 0.25 ]                            
+        [ diag, 1 ]                           # Vector with all-positive components equidistant from all coordinate axes. 
+        [ diag, 2 ]                            
+        [ diag, 0.5 ]                            
+        [ diag, 0.25 ]                            
         [ np.array([1 if i == 0 else 0 for i in range(dim)]), 1 ]      # 1-hot vector with nonzero value in first dimension. 
         [ np.array([1 if i < 2 else 0 for i in range(dim)]), 1 ]       # 2-hot vector with nonzero values in first 2 dimensions. 
-    ]    
+        
 
     # Append translation config. 
     transforms.append([ affine_funcs.translation, transl_args ])
@@ -31,9 +36,9 @@ def get_config(dim):
     hom_args = [
         [ np.zeros(dim), 2 ]
         [ np.zeros(dim), 0.5 ]
-        [ np.ones(dim) / math.sqrt(dim), 2 ]                            
-        [ np.ones(dim) / math.sqrt(dim), 0.5 ]                            
-        [ np.ones(dim) / math.sqrt(dim), 0.25 ]                            
+        [ diag, 2 ]                            
+        [ diag, 0.5 ]                            
+        [ diag, 0.25 ]                            
     ]
        
     # Append hom config. 
@@ -45,7 +50,7 @@ def get_config(dim):
     # FORMAT: [ hyperplane_vec ]
     mulan_args = [
         [ np.zeros(dim) ]
-        [ np.ones(dim) / math.sqrt(dim) ]                            
+        [ diag ]                            
         [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
         [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
     ]
@@ -58,8 +63,7 @@ def get_config(dim):
     # 2-DIMENSIONAL PLANAR ROTATION. 
     # FORMAT: [ u, v, theta ]
     rot_args = [
-        [ np.zeros(dim) ]
-        [ np.ones(dim) / math.sqrt(dim) ]                            
+        [ diag ]                            
         [ np.array([1 if i == 0 else 0 for i in range(dim)]) ]    
         [ np.array([1 if i < 2 else 0 for i in range(dim)]) ] 
     ]
