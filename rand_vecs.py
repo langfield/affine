@@ -136,18 +136,12 @@ def genflow(emb_path, emb_format, first_n):
     for transform in transforms:
         
         func = transform[0]
-        argl = transform[1]
+        arglist = transform[1]
 
         new_emb_path =  str(os.path.join(parent, "random__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
 
-        # RUN THE TRAINING PROCESS
-        eval_process = mp.Process(name="eval",
-                                   target=epoch,
-                                   args=(vectors_matrix,
-                                         label_df,
-                                         new_emb_path))
 
         eval_process.start()    
         eval_process.join()

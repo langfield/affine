@@ -33,7 +33,8 @@ def get_config(dim):
     ]        
 
     # Append translation config. 
-    transforms.append([ affine_funcs.translation, transl_args ])
+    for argset in transl_args:
+        transforms.append([ affine_funcs.translation, argset ]) 
     
     #=================================
 
@@ -49,7 +50,8 @@ def get_config(dim):
     ]
        
     # Append hom config. 
-    transforms.append([ affine_funcs.homothetic, hom_args ])
+    for argset in hom_args:
+        transforms.append([ affine_funcs.homothetic, argset ]) 
 
     #=================================
 
@@ -62,8 +64,9 @@ def get_config(dim):
         [ two_hot ] 
     ]
        
-    # Append hom config. 
-    transforms.append([ affine_funcs.reflect, mulan_args ])
+    # Append reflection config. 
+    for argset in mulan_args:
+        transforms.append([ affine_funcs.reflect, argset ]) 
 
     #=================================
 
@@ -81,9 +84,12 @@ def get_config(dim):
         [ one_hot, next_hot, pi ]    
         [ one_hot, next_hot, pi/2 ]    
     ]
-       
-    # Append hom config. 
-    transforms.append([ affine_funcs.rotate_2D, rot_args ])
+
+    # Append rot config. 
+    for argset in rot_args:
+        transforms.append([ affine_funcs.rotate_2D, argset ]) 
+    
+    return transforms   
 
 if __name__ == '__main__':
     get_config(100)
