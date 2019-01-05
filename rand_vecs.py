@@ -126,8 +126,7 @@ def genflow(emb_path, emb_format, first_n):
     now = datetime.datetime.now()
     timestamp = now.strftime("%Y-%m-%d-%H%M")
     
-    # the name of the embedding to save
-    # something like "~/<path>/steve.txt"
+    # The name of the embedding to save. 
     parent = os.path.abspath(os.path.join(emb_path, "../"))
     check_valid_dir(parent)
 
@@ -141,7 +140,25 @@ def genflow(emb_path, emb_format, first_n):
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
-        transformed_vectors = func(vectors_matrix, arglist)
+        transformed_vectors = func(vectors_matrix, arglist) 
+        
+        # shape [<num_inputs>,<dimensions>]
+        print("labels shape: ", label_df.shape)
+        
+        # creates the emb dict
+        dist_emb_dict = {}
+        for i in tqdm(range(len(label_df))):
+            emb_array_row = transformed_vectors[i]
+            dist_emb_dict.update({label_df[i]:emb_array_row})
+
+        # saves the embedding
+        pyemblib.write(dist_emb_dict, 
+                       new_emb_path, 
+                       mode=pyemblib.Mode.Binary)
+
+        print("Embedding saved to: " + new_emb_path)
+
+
 
     return
 
