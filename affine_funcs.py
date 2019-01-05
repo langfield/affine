@@ -115,20 +115,26 @@ def rotate_2D(u, v, theta, matrix):
     # PLANAR ROTATION IN R^n
     trans_matrix = []
     num_rows = len(matrix)
+    
+    dim = len(matrix[i])
+    I = np.identity(dim) 
+    u_transpose = np.flip(u)
+    v_transpose = np.flip(v)
+    diff_1 = np.multiply(v,u_transpose) - np.multiply(u,v_transpose)
+    diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
+    summand_1 = np.sin(theta) * diff_1
+    summand_2 = (np.cos(theta)  - 1) * diff_2
+    trans_matrix = I + summand_1 + summand_2
+    
+    rot_vectors = []
 
     # This cannot possibly be correct.
-    for i in tqdm(range(0,num_rows)):
-        row = matrix[i]
-        dimensions = len(row)
-        I = np.identity(dimensions) 
-        u_transpose = np.flip(u)
-        v_transpose = np.flip(v)
-        diff_1 = np.multiply(v,u_transpose) - np.multiply(u,v_transpose)
-        diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
-        summand_1 = np.sin(theta) * diff_1
-        summand_2 = (np.cos(theta)  - 1) * diff_2
-        trans_matrix = I + summand_1 + summand_2 
-    return trans_matrix
+    for i, row in tqdm(enumerate(matrix)):
+        rot_row = np.multiply(trans_matrix, row)
+        rot_vectors.append(row_row)
+
+    rot_matrix = np.array(rot_vectors)
+    return rot_matrix
 
 #========1=========2=========3=========4=========5=========6=========7==
 
@@ -160,40 +166,5 @@ def transflow():
 
     sample_vector = vectors_matrix[0]
     dimensions = len(sample_vector)
-
-    
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
