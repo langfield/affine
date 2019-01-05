@@ -15,7 +15,7 @@ def get_config(dim):
     diag_1      = [ -1*val if i == 0 else val for i, val in enumerate(diag) ]
     diag_half   = [ -1*val if i < int(dim/2) else val for i, val in enumerate(diag) ]
     one_hot     = np.array([1 if i == 0 else 0 for i in range(dim)])
-    next_hot     = np.array([1 if i == 1 else 0 for i in range(dim)])
+    next_hot    = np.array([1 if i == 1 else 0 for i in range(dim)])
     two_hot     = np.array([1 if i < 2 else 0 for i in range(dim)])
     two_hot     = two_hot / np.linalg.norn(two_hot) # Normalize. 
     

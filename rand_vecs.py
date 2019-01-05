@@ -133,18 +133,15 @@ def genflow(emb_path, emb_format, first_n):
 
     transforms = config(dim) 
 
-    for transform in transforms:
+    for i,transform in enumerate(transforms):
         
         func = transform[0]
         arglist = transform[1]
 
-        new_emb_path =  str(os.path.join(parent, "random__source--" + source_name 
+        new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
-
-
-        eval_process.start()    
-        eval_process.join()
+        transformed_vectors = func(vectors_matrix, arglist)
 
     return
 
