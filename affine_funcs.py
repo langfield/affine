@@ -48,7 +48,7 @@ def translation(direction, size, matrix):
     translation_vec = translation_size * translation_vec   
  
     # Apply the translation. 
-    for i in range(0, num_rows):     
+    for i in tqdm(range(0, num_rows)):     
         trans_matrix[i] = vectors_matrix[i] + translation_vec
 
     return trans_matrix
@@ -67,7 +67,7 @@ def homothetic(center, size, matrix):
 
     trans_matrix = []
 
-    for i in range(0,num_rows):
+    for i in tqdm(range(0,num_rows)):
         center_diff = vectors_matrix[i] - center
         scaled_center_diff = dilation_size * center_diff
         trans_matrix[i] = center + scaled_center_diff
@@ -83,7 +83,7 @@ def uniform_scale(size, matrix):
     
     trans_matrix = []
 
-    for i in range(0,num_rows):
+    for i in tqdm(range(0,num_rows)):
         trans_matrix[i] = size * matrix[i]
     
     return trans_matrix
@@ -99,7 +99,7 @@ def reflect(hyperplane_vec, matrix):
     a = hyperplane_vec    
     trans_matrix = []
 
-    for i in range(0,num_rows):
+    for i in tqdm(range(0,num_rows)):
         v = matrix[i]
         reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
         trans_matrix[i] = reflected_v
@@ -117,7 +117,7 @@ def rotate_2D(u, v, theta, matrix):
     num_rows = len(matrix)
 
     # This cannot possibly be correct.
-    for i in range(0,num_rows):
+    for i in tqdm(range(0,num_rows)):
         row = matrix[i]
         dimensions = len(row)
         I = np.identity(dimensions) 
