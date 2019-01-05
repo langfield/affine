@@ -30,7 +30,7 @@ def get_config(dim):
         [ diag, 0.25 ]                            
         [ one_hot, 1 ]  # 1-hot vector with nonzero value in first dimension. 
         [ two_hot, 1 ]  # 2-hot vector with nonzero values in first 2 dimensions. 
-        
+    ]        
 
     # Append translation config. 
     transforms.append([ affine_funcs.translation, transl_args ])
@@ -84,13 +84,6 @@ def get_config(dim):
        
     # Append hom config. 
     transforms.append([ affine_funcs.rotate_2D, rot_args ])
-
-
-
-
-
-
-
 
 if __name__ == '__main__':
     get_config(100)

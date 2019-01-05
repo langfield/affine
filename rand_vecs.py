@@ -1,6 +1,7 @@
 from preprocessing  import process_embedding
 from preprocessing  import check_valid_file
 from preprocessing  import check_valid_dir
+from config import config
 
 import tensorflow.contrib.layers    as lays
 import multiprocessing              as mp
@@ -118,7 +119,7 @@ def genflow(emb_path, emb_format, first_n):
     num_outputs = num_inputs 
 
     # dimensionality of the embedding file
-    num_hidden = shape[1]
+    dim = shape[1]
  
     #===================================================================
 
@@ -130,7 +131,13 @@ def genflow(emb_path, emb_format, first_n):
     parent = os.path.abspath(os.path.join(emb_path, "../"))
     check_valid_dir(parent)
 
+    transforms = config(dim) 
+
     for transform in transforms:
+        
+        func = transform[0]
+        argl = transform[1]
+
         new_emb_path =  str(os.path.join(parent, "random__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
