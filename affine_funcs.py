@@ -33,15 +33,16 @@ def parse_args():
 #========1=========2=========3=========4=========5=========6=========7==
 
 # RETURNS: translated matrix. 
-def translation(direction, size, matrix):
+def translation(matrix, args):
+
+    direction, size = args
 
     # TRANSLATION
 
     # Generate the translation unit vector. 
-    translation_vec = np.zeros(1,100)
-    translation_vec[0] = 1   
+    translation_vec = direction
  
-    translation_size = 6
+    translation_size = size
     trans_matrix = []
 
     # Multiply our unit direction vector by our chosen scale factor. 
@@ -56,15 +57,11 @@ def translation(direction, size, matrix):
 #========1=========2=========3=========4=========5=========6=========7==
 
 # RETURNS: Homothetic transform of matrix. 
-def homothetic(center, size, matrix):
+def homothetic(matrix, args):
+
+    center, dilation_size = args
 
     # HOMOGENEOUS DILATION
-
-    # For a sample center point, we just use the origin. 
-    center = np.zeros(1,100)
-    
-    dilation_size = 6
-
     trans_matrix = []
 
     for i in tqdm(range(0,num_rows)):
@@ -77,14 +74,16 @@ def homothetic(center, size, matrix):
 #========1=========2=========3=========4=========5=========6=========7==
 
 # RETURNS: Uniform scale of matrix. 
-def uniform_scale(size, matrix):
+def uniform_scale(matrix, args):
+
+    magnitude = args[0]
 
     # UNIFORM SCALE    
     
     trans_matrix = []
 
     for i in tqdm(range(0,num_rows)):
-        trans_matrix[i] = size * matrix[i]
+        trans_matrix[i] = magnitude * matrix[i]
     
     return trans_matrix
 
@@ -93,7 +92,9 @@ def uniform_scale(size, matrix):
 # Note that a hyperplane through the origin in R^n is defined by a 
 # single vector (hyperplane orthogonal to a). 
 # RETURNS: Uniform scale of matrix. 
-def reflect(hyperplane_vec, matrix):
+def reflect(matrix, args):
+
+    hyperplane_vec = args[0]
 
     # REFLECTION        
     a = hyperplane_vec    
@@ -110,7 +111,9 @@ def reflect(hyperplane_vec, matrix):
 
 # RETURNS: Rotation of angle theta within the plane specified by
 # the two vectors u,v.  
-def rotate_2D(u, v, theta, matrix):
+def rotate_2D(matrix, args):
+
+    u,v,theta = args
 
     # PLANAR ROTATION IN R^n
     trans_matrix = []
