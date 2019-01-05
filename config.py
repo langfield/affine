@@ -7,6 +7,8 @@ import math
 def get_config(dim):
     transforms = []
 
+    pi = np.pi
+
     # VECTOR LIBRARY.
     zeroes      = np.zeros(dim) 
     diag        = np.ones(dim) / math.sqrt(dim)
@@ -68,10 +70,16 @@ def get_config(dim):
     # 2-DIMENSIONAL PLANAR ROTATION. 
     # FORMAT: [ u, v, theta ]
     rot_args = [
-        [ diag , diag_1 , 90]                            
-        [ diag , diag_half ]                            
-        [ one_hot, next_hot ]    
-        [ two_hot ] 
+        [ diag , diag_1 , pi ]                            
+        [ diag , diag_1 , pi/2 ]                            
+        [ diag , diag_1 , pi/4 ]                            
+        [ diag , diag_1 , pi/6 ]                            
+        [ diag , diag_half, pi ]                            
+        [ diag , diag_half, pi/2 ]                            
+        [ diag , diag_half, pi/4 ]                            
+        [ diag , diag_half, pi/6 ]                            
+        [ one_hot, next_hot, pi ]    
+        [ one_hot, next_hot, pi/2 ]    
     ]
        
     # Append hom config. 
