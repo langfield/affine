@@ -130,7 +130,7 @@ def genflow(emb_path, emb_format, first_n):
 
     transforms = config(dim)
 
-    output_embedding_names = [] 
+    output_embedding_paths = [] 
 
     for i,transform in enumerate(transforms):
         
@@ -140,7 +140,7 @@ def genflow(emb_path, emb_format, first_n):
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
-        output_embeddings.append(new_emb_path)
+        output_embedding_paths.append(new_emb_path)
 
         transformed_vectors = func(vectors_matrix, arglist) 
         
@@ -159,6 +159,12 @@ def genflow(emb_path, emb_format, first_n):
                        mode=pyemblib.Mode.Binary)
 
         print("Embedding saved to: " + new_emb_path)
+
+    # Write the output embedding names to a text file. 
+    name_list_path = "affine__source--" + source_name + "__time--" + timestamp + ".txt"
+    with open(name_list_path, 'w') as f:
+    for path in output_embedding_paths:
+        f.write(path + "\n")
 
     return
 
