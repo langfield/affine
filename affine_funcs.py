@@ -49,8 +49,8 @@ def translation(matrix, args):
     translation_vec = translation_size * translation_vec   
  
     # Apply the translation. 
-    for i in tqdm(range(0, num_rows)):     
-        trans_matrix[i] = vectors_matrix[i] + translation_vec
+    for i,vector in tqdm(enumerate(matrix)):
+        trans_matrix[i] = matrix[i] + translation_vec
 
     return trans_matrix
 
@@ -65,7 +65,7 @@ def homothetic(matrix, args):
     trans_matrix = []
 
     for i,vector in tqdm(enumerate(matrix)):
-        center_diff = vectors_matrix[i] - center
+        center_diff = matrix[i] - center
         scaled_center_diff = dilation_size * center_diff
         trans_matrix[i] = center + scaled_center_diff
     
