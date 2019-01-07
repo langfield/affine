@@ -161,10 +161,11 @@ def genflow(emb_path, emb_format, first_n):
         print("Embedding saved to: " + new_emb_path)
 
     # Write the output embedding names to a text file. 
-    name_list_path = "affine__source--" + source_name + "__time--" + timestamp + ".txt"
-    with open(name_list_path, 'w') as f:
-    for path in output_embedding_paths:
-        f.write(path + "\n")
+    outputlist_name = "affine__source--" + source_name + "__time--" + timestamp + ".txt"
+    outputlist_path = os.path.join(parent, outputlist_name)
+    with open(outputlist_path, 'w') as f:
+        for path in output_embedding_paths:
+            f.write(path + "\n")
 
     return
 
