@@ -104,6 +104,7 @@ def genflow(emb_path, emb_format, first_n):
 
     # Preprocess.
     print("About to preprocess. ") 
+    sys.stdout.flush()
     vectors_matrix,label_df = process_embedding(emb_path,
                                                 emb_format, 
                                                 first_n,
@@ -134,7 +135,7 @@ def genflow(emb_path, emb_format, first_n):
 
     print("Is anything happening here?") 
     sys.stdout.flush()
-    transforms = config(dim)
+    transforms = get_config(dim)
     print("Got transforms. ")
     sys.stdout.flush()
 
