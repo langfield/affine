@@ -148,7 +148,6 @@ def genflow(emb_path, emb_format, first_n):
 
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
-        print("Writing to: ", new_emb_path)
         sys.stdout.flush()
         output_embedding_paths.append(new_emb_path)
     

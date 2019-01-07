@@ -82,7 +82,7 @@ def uniform_scale(matrix, args):
     
     trans_matrix = []
 
-    for i,vector in tqdm(enuemrate(matrix)):
+    for i,vector in tqdm(enumerate(matrix)):
         trans_matrix.append(magnitude * matrix[i])
     
     return trans_matrix
@@ -100,7 +100,7 @@ def reflect(matrix, args):
     a = hyperplane_vec    
     trans_matrix = []
 
-    for i,vector in tqdm(enuemrate(matrix)):
+    for i,vector in tqdm(enumerate(matrix)):
         v = matrix[i]
         reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
         trans_matrix.append(reflected_v)
@@ -119,7 +119,7 @@ def rotate_2D(matrix, args):
     mat = []
     num_rows = len(matrix)
     
-    dim = len(matrix[i])
+    dim = len(matrix[0])
     I = np.identity(dim) 
     u_transpose = np.flip(u)
     v_transpose = np.flip(v)
@@ -134,7 +134,7 @@ def rotate_2D(matrix, args):
     # There's gotta be a quicker way. 
     for i, row in tqdm(enumerate(matrix)):
         rot_row = np.multiply(mat, row)
-        rot_vectors.append(row_row)
+        rot_vectors.append(rot_row)
 
     rot_matrix = np.array(rot_vectors)
     return rot_matrix
