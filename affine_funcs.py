@@ -118,13 +118,15 @@ def rotate_2D(matrix, args):
     # PLANAR ROTATION IN R^n
     mat = []
     num_rows = len(matrix)
-    
+ 
     dim = len(matrix[0])
     I = np.identity(dim) 
-    u_transpose = np.flip(u)
-    v_transpose = np.flip(v)
-    diff_1 = np.multiply(v,u_transpose) - np.multiply(u,v_transpose)
-    diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
+    diff_1 = np.multiply(v,np.transpose(u)) - np.multiply(u,np.transpose(v))
+    diff_2 = np.multiply(u,np.transpose(u)) - np.multiply(v,np.transpose(v))
+    print("Following two shapes should be", str(dim), "x", str(dim))
+    print(diff_1.shape)
+    print(diff_2.shape)
+    sys.stdout.flush()
     summand_1 = np.sin(theta) * diff_1
     summand_2 = (np.cos(theta)  - 1) * diff_2
     mat = I + summand_1 + summand_2
