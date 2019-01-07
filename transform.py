@@ -128,7 +128,9 @@ def genflow(emb_path, emb_format, first_n):
     parent = os.path.abspath(os.path.join(emb_path, "../"))
     check_valid_dir(parent)
 
-    transforms = config(dim) 
+    transforms = config(dim)
+
+    output_embedding_names = [] 
 
     for i,transform in enumerate(transforms):
         
@@ -138,6 +140,8 @@ def genflow(emb_path, emb_format, first_n):
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
+        output_embeddings.append(new_emb_path)
+
         transformed_vectors = func(vectors_matrix, arglist) 
         
         # shape [<num_inputs>,<dimensions>]
