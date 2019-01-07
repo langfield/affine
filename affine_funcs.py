@@ -131,7 +131,7 @@ def rotate_2D(matrix, args):
     
     rot_vectors = []
 
-    # This cannot possibly be correct.
+    # There's gotta be a quicker way. 
     for i, row in tqdm(enumerate(matrix)):
         rot_row = np.multiply(trans_matrix, row)
         rot_vectors.append(row_row)

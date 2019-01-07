@@ -1,5 +1,4 @@
-from gensim.scripts.glove2word2vec import glove2word2vec
-from gensim.models.keyedvectors import KeyedVectors
+
 from progressbar import progressbar
 from tqdm import tqdm
 
