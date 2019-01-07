@@ -58,7 +58,7 @@ def get_config(dim):
     # REFLECTION. 
     # FORMAT: [ hyperplane_vec ]
     mulan_args = [
-        [ zeroes ],
+        # Note it does not make sense to try zero vector here. Hyperplane orthogonal to zero vector is poorly defined. 
         [ diag ],                            
         [ one_hot ],    
         [ two_hot ], 
