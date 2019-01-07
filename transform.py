@@ -19,10 +19,10 @@ import sys
 import os
 
 '''
-rand_vecs.py
+transform.py
 
-Script to generate an embedding with random, normalized vectors for each
-token from a source vocab file. 
+Script to generate a sequence of affine transformations of a set of 
+pretrained word embeddings. 
 '''
 
 #========1=========2=========3=========4=========5=========6=========7==
