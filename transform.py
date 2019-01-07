@@ -100,12 +100,13 @@ def genflow(emb_path, emb_format, first_n):
     # set to 0 to take entire embedding
     first_n = 0
 
-    # Preprocess. 
+    # Preprocess.
+    print("About to preprocess. ") 
     vectors_matrix,label_df = process_embedding(emb_path,
                                                 emb_format, 
                                                 first_n,
                                                 None)
-
+    print("Done preprocessing. ")
     # We get the dimensions of the input dataset. 
     shape = vectors_matrix.shape
     print("Shape of embedding matrix: ", shape)
