@@ -50,7 +50,7 @@ def translation(matrix, args):
  
     # Apply the translation. 
     for i,vector in tqdm(enumerate(matrix)):
-        trans_matrix[i] = matrix[i] + translation_vec
+        trans_matrix.append(matrix[i] + translation_vec)
 
     return trans_matrix
 
@@ -67,7 +67,7 @@ def homothetic(matrix, args):
     for i,vector in tqdm(enumerate(matrix)):
         center_diff = matrix[i] - center
         scaled_center_diff = dilation_size * center_diff
-        trans_matrix[i] = center + scaled_center_diff
+        trans_matrix.append(center + scaled_center_diff)
     
     return trans_matrix
 
@@ -83,7 +83,7 @@ def uniform_scale(matrix, args):
     trans_matrix = []
 
     for i,vector in tqdm(enuemrate(matrix)):
-        trans_matrix[i] = magnitude * matrix[i]
+        trans_matrix.append(magnitude * matrix[i])
     
     return trans_matrix
 
@@ -103,7 +103,7 @@ def reflect(matrix, args):
     for i,vector in tqdm(enuemrate(matrix)):
         v = matrix[i]
         reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
-        trans_matrix[i] = reflected_v
+        trans_matrix.append(reflected_v)
     
     return trans_matrix
 
@@ -116,7 +116,7 @@ def rotate_2D(matrix, args):
     u,v,theta = args
 
     # PLANAR ROTATION IN R^n
-    trans_matrix = []
+    mat = []
     num_rows = len(matrix)
     
     dim = len(matrix[i])
@@ -127,13 +127,13 @@ def rotate_2D(matrix, args):
     diff_2 = np.multiply(u,u_transpose) - np.multiply(v,v_transpose)
     summand_1 = np.sin(theta) * diff_1
     summand_2 = (np.cos(theta)  - 1) * diff_2
-    trans_matrix = I + summand_1 + summand_2
+    mat = I + summand_1 + summand_2
     
     rot_vectors = []
 
     # There's gotta be a quicker way. 
     for i, row in tqdm(enumerate(matrix)):
-        rot_row = np.multiply(trans_matrix, row)
+        rot_row = np.multiply(mat, row)
         rot_vectors.append(row_row)
 
     rot_matrix = np.array(rot_vectors)
