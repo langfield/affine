@@ -1,7 +1,7 @@
 from preprocessing  import process_embedding
 from preprocessing  import check_valid_file
 from preprocessing  import check_valid_dir
-from config import config
+from config import get_config
 
 import multiprocessing              as mp
 import pandas                       as pd
