@@ -92,9 +92,11 @@ def genflow(emb_path, emb_format, first_n):
     print_sleep_interval = 1 
     print("checkpoint 1")
     check_valid_file(emb_path)
+    sys.stdout.flush()
 
     source_name = os.path.splitext(os.path.basename(emb_path))[0]
     print("Source name:", source_name)
+    sys.stdout.flush()
 
     # take the first n most frequent word vectors for a subset
     # set to 0 to take entire embedding
@@ -107,6 +109,7 @@ def genflow(emb_path, emb_format, first_n):
                                                 first_n,
                                                 None)
     print("Done preprocessing. ")
+    sys.stdout.flush()
     # We get the dimensions of the input dataset. 
     shape = vectors_matrix.shape
     print("Shape of embedding matrix: ", shape)
@@ -129,7 +132,11 @@ def genflow(emb_path, emb_format, first_n):
     parent = os.path.abspath(os.path.join(emb_path, "../"))
     check_valid_dir(parent)
 
+    print("Is anything happening here?") 
+    sys.stdout.flush()
     transforms = config(dim)
+    print("Got transforms. ")
+    sys.stdout.flush()
 
     output_embedding_paths = [] 
 
@@ -141,8 +148,11 @@ def genflow(emb_path, emb_format, first_n):
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
                         + "__" + "time--" + timestamp + ".bin"))
         print("Writing to: ", new_emb_path)
+        sys.stdout.flush()
         output_embedding_paths.append(new_emb_path)
-
+    
+        print("About to start generation.")
+        sys.stdout.flush()
         transformed_vectors = func(vectors_matrix, arglist) 
         
         # shape [<num_inputs>,<dimensions>]
