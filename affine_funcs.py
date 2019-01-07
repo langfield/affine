@@ -64,7 +64,7 @@ def homothetic(matrix, args):
     # HOMOGENEOUS DILATION
     trans_matrix = []
 
-    for i in tqdm(range(0,num_rows)):
+    for i,vector in tqdm(enumerate(matrix)):
         center_diff = vectors_matrix[i] - center
         scaled_center_diff = dilation_size * center_diff
         trans_matrix[i] = center + scaled_center_diff
@@ -82,7 +82,7 @@ def uniform_scale(matrix, args):
     
     trans_matrix = []
 
-    for i in tqdm(range(0,num_rows)):
+    for i,vector in tqdm(enuemrate(matrix)):
         trans_matrix[i] = magnitude * matrix[i]
     
     return trans_matrix
@@ -100,7 +100,7 @@ def reflect(matrix, args):
     a = hyperplane_vec    
     trans_matrix = []
 
-    for i in tqdm(range(0,num_rows)):
+    for i,vector in tqdm(enuemrate(matrix)):
         v = matrix[i]
         reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
         trans_matrix[i] = reflected_v
