@@ -120,8 +120,10 @@ def rotate_2D(matrix, args):
     num_rows = len(matrix)
  
     dim = len(matrix[0])
-    I = np.identity(dim) 
-    diff_1 = np.multiply(v,np.transpose(u)) - np.multiply(u,np.transpose(v))
+    I = np.identity(dim)
+    print(np.array(v))
+    print(np.transpose(np.array(u))) 
+    diff_1 = np.multiply(np.array(v),np.transpose(u)) - np.multiply(np.array(u),np.transpose(v))
     diff_2 = np.multiply(u,np.transpose(u)) - np.multiply(v,np.transpose(v))
     print("Following two shapes should be", str(dim), "x", str(dim))
     print(diff_1.shape)
