@@ -17,19 +17,19 @@ def get_config(dim):
     one_hot     = np.array([1 if i == 0 else 0 for i in range(dim)])
     next_hot    = np.array([1 if i == 1 else 0 for i in range(dim)])
     two_hot     = np.array([1 if i < 2 else 0 for i in range(dim)])
-    two_hot     = two_hot / np.linalg.norn(two_hot) # Normalize. 
+    two_hot     = two_hot / np.linalg.norm(two_hot) # Normalize. 
     
     #=================================
 
     # TRANSLATION. 
     # FORMAT: [ direction_vector, magnitude ]
     transl_args = [
-        [ diag, 1 ]     # Vector with all-positive components equidistant from all coordinate axes. 
-        [ diag, 2 ]                            
-        [ diag, 0.5 ]                            
-        [ diag, 0.25 ]                            
-        [ one_hot, 1 ]  # 1-hot vector with nonzero value in first dimension. 
-        [ two_hot, 1 ]  # 2-hot vector with nonzero values in first 2 dimensions. 
+        [ diag, 1 ],     # Vector with all-positive components equidistant from all coordinate axes. 
+        [ diag, 2 ],                            
+        [ diag, 0.5 ],                            
+        [ diag, 0.25 ],                            
+        [ one_hot, 1 ],  # 1-hot vector with nonzero value in first dimension. 
+        [ two_hot, 1 ],  # 2-hot vector with nonzero values in first 2 dimensions. 
     ]        
 
     # Append translation config. 
@@ -42,11 +42,11 @@ def get_config(dim):
     # FORMAT: [ center, magnitude ]
     # Note: A magnitude of 1 leaves all vectors unchanged. 
     hom_args = [
-        [ zeroes, 2 ]
-        [ zeroes, 0.5 ]
-        [ diag, 2 ]                            
-        [ diag, 0.5 ]                            
-        [ diag, 0.25 ]                            
+        [ zeroes, 2 ],
+        [ zeroes, 0.5 ],
+        [ diag, 2 ],                            
+        [ diag, 0.5 ],                            
+        [ diag, 0.25 ],                            
     ]
        
     # Append hom config. 
@@ -58,10 +58,10 @@ def get_config(dim):
     # REFLECTION. 
     # FORMAT: [ hyperplane_vec ]
     mulan_args = [
-        [ zeroes ]
-        [ diag ]                            
-        [ one_hot ]    
-        [ two_hot ] 
+        [ zeroes ],
+        [ diag ],                            
+        [ one_hot ],    
+        [ two_hot ], 
     ]
        
     # Append reflection config. 
@@ -73,16 +73,16 @@ def get_config(dim):
     # 2-DIMENSIONAL PLANAR ROTATION. 
     # FORMAT: [ u, v, theta ]
     rot_args = [
-        [ diag , diag_1 , pi ]                            
-        [ diag , diag_1 , pi/2 ]                            
-        [ diag , diag_1 , pi/4 ]                            
-        [ diag , diag_1 , pi/6 ]                            
-        [ diag , diag_half, pi ]                            
-        [ diag , diag_half, pi/2 ]                            
-        [ diag , diag_half, pi/4 ]                            
-        [ diag , diag_half, pi/6 ]                            
-        [ one_hot, next_hot, pi ]    
-        [ one_hot, next_hot, pi/2 ]    
+        [ diag , diag_1 , pi ],                            
+        [ diag , diag_1 , pi/2 ],                            
+        [ diag , diag_1 , pi/4 ],                            
+        [ diag , diag_1 , pi/6 ],                            
+        [ diag , diag_half, pi ],                            
+        [ diag , diag_half, pi/2 ],                            
+        [ diag , diag_half, pi/4 ],                            
+        [ diag , diag_half, pi/6 ],                            
+        [ one_hot, next_hot, pi ],    
+        [ one_hot, next_hot, pi/2 ],    
     ]
 
     # Append rot config. 
