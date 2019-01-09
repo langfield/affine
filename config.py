@@ -25,11 +25,11 @@ def get_config(dim):
     # FORMAT: [ direction_vector, magnitude ]
     transl_args = [
         [ diag, 1 ],     # Vector with all-positive components equidistant from all coordinate axes. 
-        [ diag, 2 ],                            
-        [ diag, 0.5 ],                            
-        [ diag, 0.25 ],                            
+        #[ diag, 2 ],                            
+        #[ diag, 0.5 ],                            
+        #[ diag, 0.25 ],                            
         [ one_hot, 1 ],  # 1-hot vector with nonzero value in first dimension. 
-        [ two_hot, 1 ],  # 2-hot vector with nonzero values in first 2 dimensions. 
+        #[ two_hot, 1 ],  # 2-hot vector with nonzero values in first 2 dimensions. 
     ]        
 
     # Append translation config. 
@@ -43,9 +43,9 @@ def get_config(dim):
     # Note: A magnitude of 1 leaves all vectors unchanged. 
     hom_args = [
         [ zeroes, 2 ],
-        [ zeroes, 0.5 ],
-        [ diag, 2 ],                            
-        [ diag, 0.5 ],                            
+        #[ zeroes, 0.5 ],
+        #[ diag, 2 ],                            
+        #[ diag, 0.5 ],                            
         [ diag, 0.25 ],                            
     ]
        
@@ -61,7 +61,7 @@ def get_config(dim):
         # Note it does not make sense to try zero vector here. Hyperplane orthogonal to zero vector is poorly defined. 
         [ diag ],                            
         [ one_hot ],    
-        [ two_hot ], 
+        #[ two_hot ], 
     ]
        
     # Append reflection config. 
@@ -73,16 +73,16 @@ def get_config(dim):
     # 2-DIMENSIONAL PLANAR ROTATION. 
     # FORMAT: [ u, v, theta ]
     rot_args = [
-        [ diag , diag_1 , pi ],                            
-        [ diag , diag_1 , pi/2 ],                            
+        #[ diag , diag_1 , pi ],                            
+        #[ diag , diag_1 , pi/2 ],                            
         [ diag , diag_1 , pi/4 ],                            
-        [ diag , diag_1 , pi/6 ],                            
-        [ diag , diag_half, pi ],                            
-        [ diag , diag_half, pi/2 ],                            
-        [ diag , diag_half, pi/4 ],                            
-        [ diag , diag_half, pi/6 ],                            
+        #[ diag , diag_1 , pi/6 ],                            
+        #[ diag , diag_half, pi ],                            
+        #[ diag , diag_half, pi/2 ],                            
+        #[ diag , diag_half, pi/4 ],                            
+        #[ diag , diag_half, pi/6 ],                            
         [ one_hot, next_hot, pi ],    
-        [ one_hot, next_hot, pi/2 ],    
+        #[ one_hot, next_hot, pi/2 ],    
     ]
 
     # Append rot config. 
