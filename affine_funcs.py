@@ -135,15 +135,19 @@ def rotate_2D(matrix, args):
     
     rot_vectors = []
 
+    rot_matrix = np.multiply(matrix, mat)
+    
+    '''
     # There's gotta be a quicker way. 
     for i, row in tqdm(enumerate(matrix)):
-        rot_row = np.multiply(mat, row)
-        print("rot_row shape", row_row)
+        rot_row = np.multiply(row, mat)
+        print("rot_row shape", rot_row)
         rot_vectors.append(rot_row)
         sys.stdout.flush()
 
     rot_matrix = np.array(rot_vectors)
-    
+    '''    
+
     # Should be (len, dim), is (len, dim, dim): fix it. 
     print("return shape: ",rot_matrix.shape)
     return rot_matrix
