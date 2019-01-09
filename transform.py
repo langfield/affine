@@ -141,7 +141,7 @@ def genflow(emb_path, emb_format, first_n):
 
     output_embedding_paths = [] 
 
-    for i,transform in enumerate(transforms):
+    for i,transform in tqdm(enumerate(transforms)):
         
         func = transform[0]
         arglist = transform[1]
