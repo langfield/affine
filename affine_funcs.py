@@ -135,7 +135,7 @@ def rotate_2D(matrix, args):
     
     rot_vectors = []
 
-    rot_matrix = np.multiply(matrix, mat)
+    rot_matrix = np.dot(matrix, mat)
     
     '''
     # There's gotta be a quicker way. 
