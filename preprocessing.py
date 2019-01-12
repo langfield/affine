@@ -137,7 +137,12 @@ def process_embedding(emb_path, emb_format, first_n, vocab):
     label_array = [ row[0] for row in emb_array.tolist() ] 
     print(label_array[0:10])
     sys.stdout.flush() 
+    
+    vectors_matrix = [ row[1:] for row in emb_array.tolist() ]
+    print(vectors_matrix[0:10])
+    sys.stdout.flush() 
 
+    '''
     emb_df = pd.Series(embedding, name="words_with_friends")
     # print(emb_df.head(10))
 
@@ -156,8 +161,9 @@ def process_embedding(emb_path, emb_format, first_n, vocab):
     # numpy matrix of just the vectors
     vectors_matrix = vectors_df.as_matrix()
     # print(vectors_matrix[0:10])
+    '''
 
-    return vectors_matrix, emb_df.loc[:,"index"]
+    return vectors_matrix, label_array
 
 #========1=========2=========3=========4=========5=========6=========7==
 
