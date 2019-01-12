@@ -157,13 +157,18 @@ def genflow(emb_path, emb_format, first_n):
         
         # shape [<num_inputs>,<dimensions>]
         print("labels shape: ", label_df.shape)
+        sys.stdout.flush()
         
         # creates the emb dict
         dist_emb_dict = {}
         for i in tqdm(range(len(label_df))):
             emb_array_row = transformed_vectors[i]
             dist_emb_dict.update({label_df[i]:emb_array_row})
+            sys.stdout.flush()
 
+        print("Embedding dict created. ")
+        sys.stdout.flush()
+        
         # saves the embedding
         pyemblib.write(dist_emb_dict, 
                        new_emb_path, 
