@@ -134,6 +134,10 @@ def process_embedding(emb_path, emb_format, first_n, vocab):
     print("numpy")
     sys.stdout.flush() 
 
+    label_array = [ row[0] for row in emb_array ] 
+    print(label_array[0:10])
+    sys.stdout.flush() 
+
     emb_df = pd.Series(embedding, name="words_with_friends")
     # print(emb_df.head(10))
 
