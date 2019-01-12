@@ -51,7 +51,7 @@ def translation(matrix, args):
     # Apply the translation. 
     for i,vector in tqdm(enumerate(matrix)):
         trans_matrix.append(matrix[i] + translation_vec)
-
+        sys.stdout.flush()
     return trans_matrix
 
 #========1=========2=========3=========4=========5=========6=========7==
@@ -68,6 +68,7 @@ def homothetic(matrix, args):
         center_diff = matrix[i] - center
         scaled_center_diff = dilation_size * center_diff
         trans_matrix.append(center + scaled_center_diff)
+        sys.stdout.flush()
     
     return trans_matrix
 
@@ -84,6 +85,7 @@ def uniform_scale(matrix, args):
 
     for i,vector in tqdm(enumerate(matrix)):
         trans_matrix.append(magnitude * matrix[i])
+        sys.stdout.flush()
     
     return trans_matrix
 
@@ -104,6 +106,7 @@ def reflect(matrix, args):
         v = matrix[i]
         reflected_v = v - ((2 * np.dot(v, a) / np.dot(a, a)) * a)
         trans_matrix.append(reflected_v)
+        sys.stdout.flush()
     
     return trans_matrix
 
