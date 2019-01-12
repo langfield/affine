@@ -130,11 +130,11 @@ def process_embedding(emb_path, emb_format, first_n, vocab):
     # "words_with_friends" is the column label for the vectors
     # this df has shape [num_inputs,2] since the vectors are all in 1
     # column as length d lists 
-    emb_array = np.array(embedding)
+    emb_array = np.array(embedding.items())
     print("numpy")
     sys.stdout.flush() 
 
-    label_array = [ row[0] for row in emb_array ] 
+    label_array = [ row[0] for row in emb_array.tolist() ] 
     print(label_array[0:10])
     sys.stdout.flush() 
 
