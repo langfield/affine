@@ -147,7 +147,7 @@ def genflow(emb_path, emb_format, first_n):
         arglist = transform[1]
 
         new_emb_path =  str(os.path.join(parent, "affine-" + str(i) + "__source--" + source_name 
-                        + "__" + "time--" + timestamp + ".txt"))
+                        + "__" + "time--" + timestamp + ".bin"))
         sys.stdout.flush()
         output_embedding_paths.append(new_emb_path)
     
@@ -177,7 +177,7 @@ def genflow(emb_path, emb_format, first_n):
         print("Embedding saved to: " + new_emb_path)
 
     # Write the output embedding names to a text file. 
-    outputlist_name = "affine-outputlist__source--" + source_name + "__time--" + timestamp + ".bin"
+    outputlist_name = "affine-outputlist__source--" + source_name + "__time--" + timestamp + ".txt"
     outputlist_path = os.path.join(parent, outputlist_name)
     with open(outputlist_path, 'w') as f:
         for path in output_embedding_paths:
