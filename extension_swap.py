@@ -11,4 +11,6 @@ for i,target in enumerate(target_list):
     target = os.path.abspath(target)
     extension = target.split('.')[-1]
     new_targ = '.'.join(target.split('.')[:len(target.split('.')) - 1]) + '.' + new_ext
-    os.system('mv' + ' ' + target + ' ' + new_targ)
+    print(target)
+    print(new_targ)
+    #os.system('mv' + ' ' + target + ' ' + new_targ)
