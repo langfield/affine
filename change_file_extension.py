@@ -11,5 +11,5 @@ for i,target in enumerate(target_list):
     target_list[i] = os.path.abspath(target)
     target = os.path.abspath(target)
     extension = target.split('.')[-1]
-    new_targ = '.'.join(target.split('.')[:len(target.split('.') - 1]) + new_ext
+    new_targ = '.'.join(target.split('.')[:len(target.split('.')) - 1]) + new_ext
     print(new_targ)
