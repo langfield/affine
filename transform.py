@@ -43,50 +43,6 @@ def parse_args():
 
 #========1=========2=========3=========4=========5=========6=========7==
 
-# VECTOR GENERATION FUNCTION
-def epoch(  vectors_matrix,
-            labels_df,
-            new_emb_path):
- 
-    name = mp.current_process().name
-    print(name, 'Starting')
-    sys.stdout.flush()
-
-    # shape [<num_inputs>,<dimensions>]
-    rand_emb_array = []
-
-    for i in range(len(vectors_matrix)):
-        vec = np.random.rand(len(vectors_matrix[0]))
-        vec = vec / np.linalg.norm(vec)
-        rand_emb_array.append(vec)
-
-    print("labels shape: ", labels_df.shape)
-    
-    # creates the emb dict
-    dist_emb_dict = {}
-    for i in tqdm(range(len(labels_df))):
-        emb_array_row = rand_emb_array[i]
-        dist_emb_dict.update({labels_df[i]:emb_array_row})
-
-    # saves the embedding
-    pyemblib.write(dist_emb_dict, 
-                   new_emb_path, 
-                   mode=pyemblib.Mode.Binary)
-
-    print("Embedding saved to: " + new_emb_path)
- 
-    print(name, 'Exiting')
-    return
-
-#=========1=========2=========3=========4=========5=========6=========7=
-
-def mkproc(func, arguments):
-    p = mp.Process(target=func, args=arguments)
-    p.start()
-    return p
-
-#========1=========2=========3=========4=========5=========6=========7==
-
 def genflow(emb_path, emb_format, first_n):
 
     print_sleep_interval = 1 

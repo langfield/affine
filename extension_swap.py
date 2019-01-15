@@ -14,6 +14,4 @@ for i,target in enumerate(target_list):
     target = "".join(target)
     extension = target.split('.')[-1]
     new_targ = '.'.join(target.split('.')[:len(target.split('.')) - 1]) + '.' + new_ext
-    print(target)
-    print(new_targ)
-    #os.system('mv' + ' ' + target + ' ' + new_targ)
+    os.system('mv' + ' ' + target + ' ' + new_targ)
