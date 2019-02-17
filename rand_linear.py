@@ -5,10 +5,10 @@ from config         import get_config
 
 import multiprocessing              as mp
 import pandas                       as pd
-import numpy                        as np
-
 from progressbar    import progressbar
 from tqdm           import tqdm
+
+import numpy as np
 
 import datetime
 import pyemblib
@@ -107,36 +107,36 @@ def genflow(emb_path, emb_format, first_n):
     print("Got transforms. ")
     sys.stdout.flush()
  
-        dimension = vectors_matrix.shape[1]
+    dimension = vectors_matrix.shape[1]
 
-        new_emb_path =  str(os.path.join(parent, "rand-linear" + "__source--" + source_name 
-                        + "__" + "time--" + timestamp + ".bin"))
-        sys.stdout.flush()
+    new_emb_path =  str(os.path.join(parent, "rand-linear" + "__source--" + source_name 
+                    + "__" + "time--" + timestamp + ".bin"))
+    sys.stdout.flush()
+
+    print("About to start generation.")
+    sys.stdout.flush()
+    transformed_vectors = rand_linear(vectors_matrix, dimension) 
     
-        print("About to start generation.")
+    # shape [<num_inputs>,<dimensions>]
+    print("labels shape: ", label_df.shape)
+    sys.stdout.flush()
+    
+    # creates the emb dict
+    dist_emb_dict = {}
+    for i in tqdm(range(len(label_df))):
+        emb_array_row = transformed_vectors[i]
+        dist_emb_dict.update({label_df[i]:emb_array_row})
         sys.stdout.flush()
-        transformed_vectors = rand_linear(vectors_matrix, dimension) 
-        
-        # shape [<num_inputs>,<dimensions>]
-        print("labels shape: ", label_df.shape)
-        sys.stdout.flush()
-        
-        # creates the emb dict
-        dist_emb_dict = {}
-        for i in tqdm(range(len(label_df))):
-            emb_array_row = transformed_vectors[i]
-            dist_emb_dict.update({label_df[i]:emb_array_row})
-            sys.stdout.flush()
 
-        print("Embedding dict created. ")
-        sys.stdout.flush()
-        
-        # saves the embedding
-        pyemblib.write(dist_emb_dict, 
-                       new_emb_path, 
-                       mode=pyemblib.Mode.Binary)
+    print("Embedding dict created. ")
+    sys.stdout.flush()
+    
+    # saves the embedding
+    pyemblib.write(dist_emb_dict, 
+                   new_emb_path, 
+                   mode=pyemblib.Mode.Binary)
 
-        print("Embedding saved to: " + new_emb_path)
+    print("Embedding saved to: " + new_emb_path)
 
     return
 
