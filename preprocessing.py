@@ -131,16 +131,13 @@ def process_embedding(emb_path, emb_format, first_n, vocab):
     # this df has shape [num_inputs,2] since the vectors are all in 1
     # column as length d lists 
     emb_array = np.array(embedding.items())
-    print("numpy")
     sys.stdout.flush() 
 
     label_array = np.array([ row[0] for row in emb_array.tolist() ])
-    print(label_array[0:10])
     sys.stdout.flush() 
     
     vectors_matrix = np.array([ row[1:] for row in emb_array.tolist() ])
     vectors_matrix = np.array([ row[0] for row in vectors_matrix ])
-    print(vectors_matrix[0:10])
     sys.stdout.flush() 
 
     '''
